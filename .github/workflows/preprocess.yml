@@ -1,0 +1,34 @@
+name: Preprocessing Otomatis
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: pip install pandas
+
+    - name: Run preprocessing
+      run: |
+        python automate_david.py \
+          --input gender_classification_v7.csv \
+          --output preprocessed/gender_clean.csv
+
+    - name: Upload preprocessed dataset
+      uses: actions/upload-artifact@v3
+      with:
+        name: preprocessed-data
+        path: preprocessed/gender_clean.csv
