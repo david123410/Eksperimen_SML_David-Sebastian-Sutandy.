@@ -23,7 +23,7 @@ jobs:
 
     - name: Run preprocessing
       run: |
-        python automate_david_sebastian_sutandy.py \
+        python preprocessing/automate_david_sebastian_sutandy.py \
           --input gender_classification_v7.csv \
           --output preprocessed/gender_clean.csv
 
